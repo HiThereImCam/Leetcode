@@ -1,5 +1,8 @@
 /**
- * Reverse a string with a recursion
+ * Reverse a string with a recursion.
+ *
+ * Do not allocate extra space for another array, you must do this
+ * by modifying the input array in-place with 0(1) extra memory
  */
 
 var reverseString = function (s) {
