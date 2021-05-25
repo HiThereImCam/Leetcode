@@ -36,6 +36,8 @@ var removeDuplicates = function (nums) {
 // you dont manipulate the array because it's only asking for the length
 // the pattern - count the number of times the values change. that is the new length
 
+// you increment j in the else so that you can move the pointer over
+
 /**
  * 
  * Solution:
