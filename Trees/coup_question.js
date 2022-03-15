@@ -74,9 +74,10 @@ class Tree {
     phrase = phrase.toLowerCase();
     let phraseList = phrase.split(".");
 
+    console.log("phraseList: ", phraseList);
     let childrenList = [];
-
     let currentNode = this.root; // root ->
+
     for (
       let phaseListIndex = 0;
       phaseListIndex < phraseList.length;
@@ -135,9 +136,9 @@ trie.insert(builtins);
 // let searchedWord = trie.search("io."); pass
 // let searchedWord = trie.search("io.jwt.enc"); pass
 // let searchedWord = trie.search("test");
-// let searchedWord = trie.search("io.jwt.");
+let searchedWord = trie.search("io.jwt.");
 
-let searchedWord = trie.search("io.jwt"); // pass
+// let searchedWord = trie.search("io.jwt"); pass
 
 // console.log(trie);
 console.log(searchedWord);
