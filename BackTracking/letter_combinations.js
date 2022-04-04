@@ -28,3 +28,35 @@ var letterCombinations = function (digits) {
 
   return result;
 };
+
+/**
+ * create backtrace function passing it index and empty string
+ *
+ * base case- if the current string is the same length as the digit
+ * push the currStr into the result array
+ *
+ * other wise, iterate through the current digits string and map the
+ * digits to the characters
+ *
+ * ex: "23"
+ *
+ * first pass
+ * index - 0
+ * digits[index] - "2"
+ * char - "a"
+ *
+ * call backtrace passing it 1 and "a"
+ *
+ * second pass
+ *
+ * index - 1
+ * digits[index] - "3"
+ * char - "d"
+ *
+ * call backtrace passing it 2 and "d"
+ *
+ * enter condional
+ * result = ["ad"]
+ * and return
+ *
+ */
