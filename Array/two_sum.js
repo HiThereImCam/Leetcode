@@ -31,3 +31,35 @@ function twoNumberSum(array, targetSum) {
 
   return [];
 }
+
+/**
+ * 4/6/22
+ *
+ * completed
+ */
+
+var twoSum = function (nums, target) {
+  /*
+        iterate through the array
+            - subtract the target from the value at index
+                - check if we have seen the subtracted value
+                    - if we have, return [index, index of subtracted value]
+        
+        how to hold the subtracted value
+            - object
+            - key is the value at index
+            - value is index
+    */
+
+  let obj = {};
+
+  for (let i = 0; i < nums.length; i++) {
+    let comp = target - nums[i]; // comp = 7
+
+    if (comp in obj) {
+      return [i, obj[comp]];
+    }
+
+    obj[nums[i]] = i;
+  }
+};
