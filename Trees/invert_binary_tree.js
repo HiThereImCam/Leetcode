@@ -47,3 +47,49 @@ var invertTree = function (root) {
 
   return root;
 };
+
+/*
+  completed and correct 4/7/22
+*/
+
+var exist = function (board, word) {
+  let dfs = (board, r, c, charIdx, word) => {
+    if (charIdx === word.length) return true;
+
+    if (
+      r < 0 ||
+      r >= board.length ||
+      c < 0 ||
+      c >= board[r].length ||
+      board[r][c] !== word[charIdx]
+    ) {
+      return false;
+    }
+
+    let temp = board[r][c];
+    board[r][c] = "";
+
+    let found =
+      dfs(board, r + 1, c, charIdx + 1, word) ||
+      dfs(board, r - 1, c, charIdx + 1, word) ||
+      dfs(board, r, c + 1, charIdx + 1, word) ||
+      dfs(board, r, c - 1, charIdx + 1, word);
+    board[r][c] = temp;
+    return found;
+  };
+
+  // iterate through board to find char
+
+  for (let r = 0; r < board.length; r++) {
+    for (let c = 0; c < board[r].length; c++) {
+      // if we have found the char and dfs comes back true
+      // then return true
+
+      if (board[r][c] === word[0] && dfs(board, r, c, 0, word)) {
+        return true;
+      }
+    }
+  }
+
+  return false;
+};
