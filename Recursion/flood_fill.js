@@ -19,3 +19,9 @@ var floodFill = function (image, sr, sc, newColor, oldColor = image[sr][sc]) {
 
   return image;
 };
+
+/**
+ *
+ * Completed 5/2/2022
+ * missed the image[sr][sc] !== oldColor condition though
+ */

@@ -50,3 +50,9 @@ var lowestCommonAncestor = function (root, p, q) {
     }
   }
 };
+
+/**
+ * tried this on 6/2/2022
+ * did not get it. will try again on 5/3/2022
+ *
+ */
