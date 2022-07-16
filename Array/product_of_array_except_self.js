@@ -40,6 +40,8 @@ var productExceptSelf = function (nums) {
   return result;
 };
 
+// Time complexity = O(n^2) STILL
+
 /*
     the fastest js version
     var productExceptSelf = function(nums) {
