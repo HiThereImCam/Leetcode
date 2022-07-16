@@ -57,8 +57,15 @@ var productExceptSelf = function (nums) {
     return result;
 };
     nums = [1,2,3,4]
-    result = [1] [1, 1] [1, 1, 2] [1,1,2,6]
-    productSoFar = 1 1 2 6
-    nums[i] = 1 2 3 4 
+    result = [1] [1,1] [1,1,2] [1,1,2,6]
+    productSoFar = 1 1 2 6 24
+    result[i] = 1 2 3 4 
     i = 0 1 2 3
+
+    second loop
+    result =  [1,1,2,6] [1,1,2,6] [1,1,8,6] [1,12,8,6] [24,12,8,6] 
+    productSoFar = 1 4 12 24
+    result[j] = 6 2 1 1 
+    nums[j] = 4 3 2 1
+    j = 3 2 1 0 
 */
