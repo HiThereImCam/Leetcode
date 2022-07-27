@@ -49,3 +49,22 @@ const treeMinValueAlv = (root) => {
   const smallestRightValue = treeMinValue(root.right);
   return Math.min(root.val, smallestLeftValue, smallestRightValue);
 };
+
+const treeMinValueStack = (root) => {
+  let min = root.val;
+  let stack = [root];
+
+  while (stack.length > 0) {
+    let currNode = stack.pop();
+    min = Math.min(currNode.val, min);
+
+    if (currNode.right) {
+      stack.push(currNode.right);
+    }
+    if (currNode.left) {
+      stack.push(currNode.left);
+    }
+  }
+
+  return min;
+};
