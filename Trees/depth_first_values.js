@@ -5,6 +5,9 @@
          
          
 */
+
+// remember - dfs uses stack
+// bfs uses queue
 const depthFirstValues = (root) => {
   if (!root) return [];
 
