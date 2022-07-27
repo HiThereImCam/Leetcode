@@ -44,9 +44,12 @@ var productExceptSelf = function (nums) {
 
 /*
     the fastest js version
+
+    
     var productExceptSelf = function(nums) {
     const result = [];
     let productSoFar = 1;
+    
     for (let i = 0; i < nums.length; i++) {
         result[i] = productSoFar
         productSoFar *= nums[i]
