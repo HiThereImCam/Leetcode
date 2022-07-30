@@ -37,6 +37,14 @@
 
     KEY
     queue = {node: node, level: 0}
+
+    Efficiencies 
+        if(levels.length === level)
+            - if levels length === level
+                - we know that there isn't an element at current level index
+                - we can just set it
+        otherwise
+            - just push the current node at its given level
             
 */
 
