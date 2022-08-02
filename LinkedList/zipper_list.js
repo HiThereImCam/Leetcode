@@ -86,3 +86,45 @@ const zipperLists = (head1, head2) => {
 /**
  * NEED TO DO AGAIN!
  */
+
+/*
+  add dummyHead
+  
+  head1 = a -> b -> c
+  head2 = x -> y -> z
+  
+  currHead1 = a b
+  currHead2 = x y
+  currentNode = null x 
+  
+  currentNode -> a -> x
+  a -> x -> b -> y -> c ->   
+  
+*/
+
+const zipperListsPart2 = (head1, head2) => {
+  let dummyHead = new Node();
+  let currentNode = dummyHead;
+  let currentHead1 = head1;
+  let currentHead2 = head2;
+  let count = 0;
+
+  while (currentHead1 !== null && currentHead2 !== null) {
+    if (count % 2 === 0) {
+      currentNode.next = currentHead1;
+      currentHead1 = currentHead1.next;
+    } else {
+      currentNode.next = currentHead2;
+      currentHead2 = currentHead2.next;
+    }
+
+    currentNode = currentNode.next;
+    count += 1;
+  }
+
+  if (!currentHead1) currentNode.next = currentHead2;
+  if (!currentHead2) currentNode.next = currentHead1;
+
+  return dummyHead.next;
+  //console.log("dummyHead next: ", dummyHead.next)
+};
