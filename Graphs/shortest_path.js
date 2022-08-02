@@ -37,7 +37,6 @@ const createGraph = (edges) => {
 const shortestPath = (edges, nodeA, nodeB) => {
   let graph = createGraph(edges);
   let visited = new Set([nodeA]); // set the current nodeA already
-  let shortestPath = Infinity;
   let queue = [[nodeA, 0]];
 
   while (queue.length > 0) {

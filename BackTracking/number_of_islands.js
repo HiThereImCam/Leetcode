@@ -83,3 +83,70 @@ var numIslands = function (grid) {
 
   return count;
 };
+
+/*
+    base case
+      - how do we know when we have reached the edge of the island
+        - if left, right, up, down is either ob or L
+        
+       if we have seen the current 'W' || ob || L
+        return
+        - what are we returning?
+          - 
+        
+        
+    edge cases that we need to think of 
+      - what happens if we have seen this char?
+          - we could change in the input val to some char like 'M'
+          - or use a set
+      
+      
+    plan
+      - iterate through the outer grid
+        - i don't know what to return from my recursive call
+            - return a count
+          
+            
+        
+    
+    
+    
+*/
+
+const findIsland = (grid, row, col, visited) => {
+  if (row < 0 || row >= grid.length || col < 0 || col >= grid[row].length)
+    return 0; // ob
+
+  if (grid[row][col] === "W") {
+    // if val is water
+    return 0;
+  }
+
+  let pos = row + "," + col;
+  if (visited.has(pos)) return 0; // has seen
+  visited.add(pos);
+
+  let left = findIsland(grid, row, col - 1, visited);
+  let right = findIsland(grid, row, col + 1, visited);
+  let top = findIsland(grid, row - 1, col, visited);
+  let bottom = findIsland(grid, row + 1, col, visited);
+
+  return 1 + left + right + top + bottom;
+};
+
+const islandCount = (grid) => {
+  let count = 0;
+  let visited = new Set();
+
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[i].length; j++) {
+      if (!visited.has(i, j)) {
+        if (findIsland(grid, i, j, visited) > 0) {
+          count += 1;
+        }
+      }
+    }
+  }
+  // console.log( count)
+  return count;
+};
