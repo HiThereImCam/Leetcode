@@ -96,3 +96,48 @@ const treeLevelsAlv = (root) => {
 
   return levels;
 };
+
+// did it again and got it
+
+/*
+  how do we know we are on the right level
+  
+  return an array
+  [] <- level 0
+  
+  check index at 0
+    if !arr[0]
+      [root.val]
+    else
+      array[at index].push(root.val)
+      
+        a
+      b   c
+  
+  result = [] -> [['a']] -> [['a'], ['b', 'c']]
+  queue = [{node: a, idx: 0}] [] [{node: b, idx: 1}] [{node: c, idx + 1}]
+  node = a b c
+  idx = 0 1 1
+      
+*/
+const treeLevelsPart2 = (root) => {
+  if (!root) return [];
+  let result = [];
+  let queue = [{ node: root, idx: 0 }];
+
+  while (queue.length > 0) {
+    let { node, idx } = queue.shift();
+
+    if (!result[idx]) {
+      result[idx] = [node.val];
+    } else {
+      result[idx].push(node.val);
+    }
+
+    if (node.left) queue.push({ node: node.left, idx: idx + 1 });
+    if (node.right) queue.push({ node: node.right, idx: idx + 1 });
+  }
+
+  return result;
+  //console.log(result)
+};
