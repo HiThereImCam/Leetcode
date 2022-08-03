@@ -71,10 +71,10 @@ const longestPath = (graph) => {
 
 const longestPathAlv = (graph) => {
   let distance = {};
-  for (const node in graph) {
+  for (let node in graph) {
     // FINDS ALL THE TERMINATING NODES
     if (graph[node].length === 0) {
-      graph[node] = 0;
+      distance[node] = 0;
     }
   }
 
@@ -87,7 +87,7 @@ const longestPathAlv = (graph) => {
 
 const traversePath = (graph, node, distance) => {
   // base case
-  // if we have seen the graph[node], return it's current distance
+  // if we have seen the distance[node], return it's current distance
   // current distance refers to distance away from terminating node
   if (node in graph) return distance[node]; //
 

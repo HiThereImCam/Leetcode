@@ -102,3 +102,39 @@ const getAvg = (array) => {
 
   return sum / array.length;
 };
+
+// second time
+
+const levelAverages2 = (root) => {
+  if (!root) return [];
+  let result = [];
+  let queue = [{ node: root, level: 0 }];
+
+  while (queue.length > 0) {
+    const { node: currNode, level: currLevel } = queue.shift();
+
+    if (currLevel === result.length) {
+      result[currLevel] = [currNode.val];
+    } else {
+      result[currLevel].push(currNode.val);
+    }
+
+    if (currNode.left)
+      queue.push({ node: currNode.left, level: currLevel + 1 });
+    if (currNode.right)
+      queue.push({ node: currNode.right, level: currLevel + 1 });
+  }
+
+  return result.map(getAverages);
+
+  // console.log( result.map(getAverages))
+};
+
+const getAverages2 = (array) => {
+  let sum = 0;
+  for (const ele of array) {
+    sum += ele;
+  }
+
+  return sum / array.length;
+};
