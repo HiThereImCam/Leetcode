@@ -49,3 +49,32 @@ const largestComponent = (graph) => {
   }
   return largest;
 };
+
+// 8/6/22
+/*
+  - did again and got it 
+*/
+
+const largestComponent = (graph) => {
+  const visited = new Set();
+  let count = 0;
+
+  for (let key in graph) {
+    let currCount = traverseNeighbor(graph, key, visited);
+    count = Math.max(count, currCount);
+  }
+
+  return count;
+
+  //console.log(count)
+};
+
+const traverseNeighbor = (graph, key, visited) => {
+  if (visited.has(key)) return 0;
+  visited.add(key);
+  let neighborCount = 0;
+  for (let neighbor of graph[key]) {
+    neighborCount += traverseNeighbor(graph, neighbor, visited);
+  }
+  return 1 + neighborCount;
+};
