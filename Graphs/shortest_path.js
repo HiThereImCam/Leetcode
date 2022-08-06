@@ -61,3 +61,16 @@ const shortestPath = (edges, nodeA, nodeB) => {
 
   return -1;
 };
+
+/**
+ 8/6/22
+ done but I should do again 
+ anything calculating shortest distance should be bst
+ i have to remember
+  - array is for of
+  - obj is for in 
+
+
+key: queue = [[nodeA, 0]]
+     visited set so that there are no infinite loops 
+*/

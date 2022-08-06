@@ -55,7 +55,7 @@ const largestComponent = (graph) => {
   - did again and got it 
 */
 
-const largestComponent = (graph) => {
+const largestComponent2 = (graph) => {
   const visited = new Set();
   let count = 0;
 
