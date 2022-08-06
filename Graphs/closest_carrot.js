@@ -76,3 +76,66 @@ const closestCarrot = (grid, startRow, startCol) => {
 
   return -1;
 };
+
+/*
+  part 2 8/6
+  do again because of deltas
+*/
+
+const closestCarrot2 = (grid, startRow, startCol) => {
+  let visited = new Set();
+  let queue = [[startRow, startCol, 0]];
+
+  while (queue.length > 0) {
+    let [row, col, distance] = queue.shift();
+    console.log("row: ", row, "col: ", col);
+
+    if (grid[row][col] === "C") return distance;
+
+    const deltas = [
+      [0, -1],
+      [0, 1],
+      [1, 0],
+      [-1, 0],
+    ];
+
+    let pos = row + "," + col;
+    visited.add(pos);
+
+    for (const delta of deltas) {
+      const [deltaRow, deltaCol] = delta;
+      // [0, -1]
+
+      const neighborRow = row + deltaRow;
+      const neighborCol = col + deltaCol;
+
+      console.log("neighborRow: ", neighborRow, "neighborCol: ", neighborCol);
+
+      if (
+        neighborRow < 0 ||
+        neighborRow >= grid.length ||
+        neighborCol < 0 ||
+        neighborCol >= grid[row].length
+      ) {
+        console.log("length broke");
+        continue;
+      }
+
+      if (grid[neighborRow][neighborCol] === "X") {
+        console.log("broke at X");
+        continue;
+      }
+
+      let neighborPos = neighborRow + "," + neighborCol;
+      if (visited.has(neighborPos)) {
+        console.log("pos broke");
+        continue;
+      }
+
+      visited.add(neighborPos);
+      queue.push([neighborRow, neighborCol, distance + 1]);
+    }
+  }
+
+  return -1;
+};
