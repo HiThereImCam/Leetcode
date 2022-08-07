@@ -70,3 +70,23 @@ const semestersRequired = (numCourses, prereqs) => {
   return Math.max(...Object.values(distance));
   //console.log(semesterCount)
 };
+
+/*
+
+  8/7/22
+  base case
+    if have calculated the distance of a node already
+    return the nodes distance
+      - we do not want to loop
+  
+  
+  things I couldn't figure out 
+    - what do i do with numCourses
+      - numCourses will act as  the total length of courses
+        that are available to take
+          - so classes will start from 0 < n < numCourses
+    - what am I trying to return?
+        - I'm trying to return the maxDistance
+  
+  watch out for []
+*/
