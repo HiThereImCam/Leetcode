@@ -53,6 +53,11 @@ var twoSum = function (nums, target) {
 
   let obj = {};
 
+  // target = 7 arr = [3, 4]
+  // obj {3: 1}
+  // 4
+  // comp 3
+
   for (let i = 0; i < nums.length; i++) {
     let comp = target - nums[i]; // comp = 7
 
