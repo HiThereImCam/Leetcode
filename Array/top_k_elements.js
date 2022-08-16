@@ -7,7 +7,7 @@
     result = []
     
     if we store value in 
-    hashMap = {
+    hashMap = { 
         1:1
         2:2
         4:3
