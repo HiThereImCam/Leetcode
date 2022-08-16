@@ -141,3 +141,51 @@ const treeLevelsPart2 = (root) => {
   return result;
   //console.log(result)
 };
+
+// PART 3
+
+/*
+  iterate through each level of the tree
+  we can use the indices an array to help us keep track of where
+  we are in the tree
+  
+              a -> level 0
+          b       c   -> level 1
+      d     e       f     -> level 2
+      
+    result array = [[a]] 
+                 = [[a] [b]]
+                 
+    as we iterate through each node
+      - we can attach a level property to keep track of where we are
+    
+    breadth first traversal
+      - queue
+      
+      
+    easiest case to take care of
+    [[a]]
+    
+    
+*/
+
+const treeLevels3 = (root) => {
+  if (root === null) return [];
+  let result = [];
+  let queue = [{ node: root, level: 0 }];
+
+  while (queue.length > 0) {
+    const { node, level } = queue.shift();
+
+    if (result[level] !== undefined) {
+      result[level].push(node.val);
+    } else {
+      result[level] = [node.val];
+    }
+
+    if (node.left) queue.push({ node: node.left, level: level + 1 });
+    if (node.right) queue.push({ node: node.right, level: level + 1 });
+  }
+
+  return result;
+};
