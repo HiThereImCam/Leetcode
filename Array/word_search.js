@@ -91,3 +91,6 @@ const wordSearch = (grid, target) => {
   }
   return false;
 };
+
+// Time complexity - O(3^(m*x))
+// Space complexity - O(m x n)
