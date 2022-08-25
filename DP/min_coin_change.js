@@ -47,3 +47,6 @@ const minChange2 = (amount, coins) => {
     let currentCount = 1 + minChange(amount - coin, coins);
   }
 };
+
+// min coin change 3- couldnt finish it
+// didn't know what to store in memo
