@@ -69,3 +69,82 @@ var topKFrequent = function (nums, k) {
 
   return result;
 };
+
+// 8/29
+
+/*
+    hashmap
+    
+    iterate through the array
+        does map contain val?
+            if yes add 1
+            if no add it to map and set val to 1
+    
+    [1, 1, 1, 2, 2, 3]
+    
+    {
+        1: 3
+        2: 3
+    }
+    
+    create a result array of size n where n is the length of the given nums array
+        - we can use the index of this as keys
+    
+    [4, 4] k = 1
+        - count = 2
+        - mod by length of the array
+            - 2 % 2 = 0
+    
+    1.) when creating the array
+        - have 1 more than the size of nums array
+    
+    [4,4] nums.length = 2
+    results length
+    
+    2 % 3 = 2 
+    
+    count = [0,0,2] k = 1
+             0 1 2
+             
+    result = [] -> [2]
+*/
+
+var topKFrequent2 = function (nums, k) {
+  let hashmap = {};
+  let count = new Array(nums.length);
+  let result = [];
+
+  nums.forEach((num) => {
+    if (num in hashmap) {
+      hashmap[num] += 1;
+    } else {
+      hashmap[num] = 1;
+    }
+  });
+
+  for (num in hashmap) {
+    let modIdx = hashmap[num] % count.length;
+
+    if (count[modIdx]) {
+      count[modIdx].push(num);
+    } else {
+      count[modIdx] = [num];
+    }
+  }
+
+  // iterate through count
+  // how do I know if it's a subArray or not
+
+  let i = count.length - 1;
+  while (result.length < k) {
+    if (count[i]) {
+      for (let num of count[i]) {
+        if (result.length === k) break;
+        result.push(num);
+      }
+    }
+    i -= 1;
+  }
+
+  return result;
+};
