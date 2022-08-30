@@ -13,3 +13,33 @@ const summingSquares = (n, memo = {}) => {
   memo[n] = minSquares;
   return minSquares;
 };
+
+/*
+  count = Infinity
+  iterate through the numbers from 1 -> n
+    recursive call
+    
+  base case
+    - if(n === 0) return 0
+    
+  
+*/
+
+const summingSquares2 = (n, memo = {}) => {
+  if (n in memo) return memo[n];
+  if (n === 0) return 0;
+
+  let count = Infinity;
+
+  // iterate through the numbers from 1 -> n
+  for (let i = 1; i <= n; i += 1) {
+    let squared = i * i;
+    if (squared <= n) {
+      let currCount = 1 + summingSquares(n - squared, memo);
+      count = Math.min(count, currCount);
+    }
+  }
+
+  memo[n] = count;
+  return count;
+};
