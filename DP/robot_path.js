@@ -7,8 +7,7 @@
 
 // At least one path
 
-// (0,0) -> (0,1) 
-
+// (0,0) -> (0,1)
 
 // // R O O
 // // O O O
@@ -20,7 +19,7 @@
 // 	0 2
 // 	1 2
 // 	1 3
-// } valid positions 
+// } valid positions
 
 // // can only move either  down or right
 
@@ -30,36 +29,31 @@
 // 	- iterate through the grid
 // 		- helper function traverses the neighbors of the current pos
 
-
 // helper function
 // 	-  ob
 // 	- check for visited
 // 	- check if value is finish line
 // 	- traverse the neighbors
 
-
-
 const robotPath = (grid) => {
-	let  visited = {}
-	let  count = 0
-	count += traverseGrid(grid, 0, 0, visited)
-   	return  count
-}
+  let visited = {};
+  let count = 0;
+  count += traverseGrid(grid, 0, 0, visited);
+  return count;
+};
 
+const traverseGrid = (grid, r, c, visited) => {
+  if (r >= grid.length || c >= grid[0].length) return 0;
 
-const  traverseGrid = (grid, r, c, visited) => {
-	if( 
-		r >= grid.length ||
-		c  >= grid[0].length
-) return 0
+  if (r === grid.length - 1 && c === grid[0].length - 1) return 1;
 
-if (r === grid.length - 1 && c === grid[0].length - 1) return 1
+  let pos = r + "," + c;
+  if (pos in visited) return visited[pos];
 
-let  pos = r + ',' + c
-if(pos in visited) return visited[pos]
+  // traverse through neighbors
 
-// traverse through neighbors 
-
-	visited[pos] = traverseGrid(grid, r + 1, c, visited) + traverseGrid(grid, r, c + 1, visited))
-	return  visited[pos]
-}
+  visited[pos] =
+    traverseGrid(grid, r + 1, c, visited) +
+    traverseGrid(grid, r, c + 1, visited);
+  return visited[pos];
+};
