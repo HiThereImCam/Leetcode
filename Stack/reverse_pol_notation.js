@@ -39,3 +39,42 @@ var evalRPN = function (tokens) {
   }
   return stack.pop();
 };
+
+// 09/1/2022
+// got it
+
+// [4, 13, 5, /, +]
+
+// stack = [4, 13, 5]
+// right = 5
+// left  = 13
+
+// stack = [4]
+// val  = 2
+
+// stack = [4, 2]
+
+let OPERANDS = {
+  "+": (a, b) => a + b,
+  "-": (a, b) => a - b,
+  "/": (a, b) => Math.trunc(a / b),
+  "*": (a, b) => a * b,
+};
+
+function RPNResults(tokens) {
+  let stack = [];
+
+  for (let token of tokens) {
+    if (token in OPERANDS) {
+      let right = stack.pop();
+      let left = stack.pop();
+      let val = OPERANDS[token](left, right);
+
+      stack.push(val);
+    }
+
+    stack.push(Number(token));
+  }
+
+  return stack.pop();
+}
