@@ -65,7 +65,7 @@ var dailyTemperatures = function (temperatures) {
 
 const dailyTemperaturesSol = (temps) => {
   const stack = [];
-  const output = new Array(temps.lenght).fill(0);
+  const output = new Array(temps.length).fill(0);
 
   for (let i = 0; i < temps.length; i++) {
     while (stack.length !== 0 && stack[stack.length - 1][0] < temps[i]) {
