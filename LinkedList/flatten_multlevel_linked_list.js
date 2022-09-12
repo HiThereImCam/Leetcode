@@ -90,6 +90,7 @@ var flatten = function (head) {
     } else {
       currNode = currNode.next;
     }
+    t;
   }
 
   return head;
