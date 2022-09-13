@@ -96,9 +96,6 @@ function simple(letters, k = 2) {
     if (letterStack.length == 0) {
       letterStack.push(letters[i]);
       countStack.push(1);
-      console.log("CountStack: ", countStack);
-      console.log("LetterStack: ", letterStack);
-      console.log("currentLetter: ", letters[i]);
       continue;
     }
 
@@ -116,8 +113,6 @@ function simple(letters, k = 2) {
     if (currentCount === k) {
       console.log("Popping off stacks-------");
       while (currentCount >= 1) {
-        console.log(countStack);
-        console.log(letterStack);
         letterStack.pop();
         countStack.pop();
         currentCount--;
@@ -127,3 +122,53 @@ function simple(letters, k = 2) {
   }
   console.log("result: ", letterStack.join(""));
 }
+
+// part 2 09/13/22
+/*
+
+    s = 'eeee' k = 2
+    
+    charStack = []
+    countStack = []
+    
+    i = 2
+    s.length = 4
+    k = 2
+    
+    currChar = e
+    
+
+    deeeddd
+    
+    [dee]
+    [11]
+    i = 3
+    
+*/
+var removeDuplicates = function (s, k) {
+  let charStack = [];
+  let countStack = [];
+
+  for (let char of s) {
+    if (char !== charStack[charStack.length - 1]) {
+      charStack.push(char);
+      countStack.push(1);
+    } else {
+      // means that the char is equivalent to top of stack
+      charStack.push(char);
+      countStack.push(countStack[countStack.length - 1] + 1);
+
+      // now check if top of stack is === k
+      if (countStack[countStack.length - 1] === k) {
+        let count = 0;
+        while (count < k) {
+          charStack.pop();
+          countStack.pop();
+          count += 1;
+        }
+      }
+    }
+  }
+
+  return charStack.join("");
+};
