@@ -61,12 +61,14 @@ let OPERANDS = {
   "*": (a, b) => a * b,
 };
 
+["2", "1", "+", "3", "*"];
+
 function RPNResults(tokens) {
   let stack = [];
 
   for (let token of tokens) {
     if (token in OPERANDS) {
-      let right = stack.pop();
+      let right;
       let left = stack.pop();
       let val = OPERANDS[token](left, right);
 
