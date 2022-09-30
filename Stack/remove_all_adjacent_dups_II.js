@@ -172,3 +172,44 @@ var removeDuplicates = function (s, k) {
 
   return charStack.join("");
 };
+
+// 09/28/2022
+/*
+    what are we looking for?
+        - we are looking for substrings that are of k length and removing them
+    
+    this falls under stack
+        - why?
+        - we are keeping track of
+            1.) the history of our characters
+            2.) the count of our characters
+*/
+
+var removeDuplicates = function (s, k) {
+  let charStack = [];
+  let countStack = [];
+
+  for (let char of s) {
+    let topOfCharStack = charStack[charStack.length - 1];
+
+    if (char === topOfCharStack) {
+      charStack.push(char);
+
+      let charCount = countStack[countStack.length - 1] + 1;
+      countStack.push(charCount);
+
+      if (charCount === k) {
+        while (charCount > 0) {
+          charStack.pop();
+          countStack.pop();
+          charCount -= 1;
+        }
+      }
+    } else {
+      charStack.push(char);
+      countStack.push(1);
+    }
+  }
+
+  return charStack.join("");
+};
