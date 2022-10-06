@@ -31,3 +31,7 @@ const groupAnagrams2 = (strs) => {
 
   return Object.values(result);
 };
+
+/**
+ * 10/5/2022
+ */

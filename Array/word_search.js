@@ -94,3 +94,49 @@ const wordSearch = (grid, target) => {
 
 // Time complexity - O(3^(m*x))
 // Space complexity - O(m x n)
+
+/**
+ * 10/6/2022
+ */
+
+const traverseGrid2 = (board, row, col, set, currIdx, word) => {
+  if (currIdx === word.length) return true;
+
+  // check ob first
+  let pos = row + "," + col;
+  if (
+    row < 0 ||
+    row >= board.length ||
+    col < 0 ||
+    col >= board[0].length ||
+    board[row][col] !== word[currIdx] ||
+    set.has(pos)
+  ) {
+    return false;
+  }
+  set.add(pos);
+
+  let found =
+    traverseGrid2(board, row, col - 1, set, currIdx + 1, word) ||
+    traverseGrid2(board, row, col + 1, set, currIdx + 1, word) ||
+    traverseGrid2(board, row - 1, col, set, currIdx + 1, word) ||
+    traverseGrid2(board, row + 1, col, set, currIdx + 1, word);
+
+  set.delete(pos);
+  return found;
+};
+
+var exist = function (board, word) {
+  for (let row = 0; row < board.length; row += 1) {
+    for (let col = 0; col < board[0].length; col += 1) {
+      if (
+        board[row][col] === word[0] &&
+        traverseGrid2(board, row, col, new Set(), 0, word) === true
+      ) {
+        return true;
+      }
+    }
+  }
+
+  return false;
+};
