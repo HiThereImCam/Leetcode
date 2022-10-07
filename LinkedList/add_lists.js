@@ -11,6 +11,7 @@ const addLists = (head1, head2) => {
     currNode1 = currNode1.next;
     currNode2 = currNode2.next;
   }
+
   if (currNode1 === null) {
     while (currNode2 !== null) {
       sum = sum + (currNode2.val + Math.pow(10, i));
