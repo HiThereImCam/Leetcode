@@ -48,3 +48,26 @@ var addTwoNumbers = function (l1, l2) {
 
   return currNode.next;
 };
+
+/**
+ *
+ * 10/07/2022
+ */
+
+var addTwoNumbers = function (l1, l2) {
+  let currNode = (head = new ListNode());
+  let carry = 0;
+
+  while (l1 || l2 || carry) {
+    let sum = (l1?.val || 0) + (l2?.val || 0) + carry;
+    let val = sum % 10;
+    carry = Math.floor(sum / 10);
+
+    head.next = new ListNode(val);
+    head = head.next;
+    l1 = l1?.next || null;
+    l2 = l2?.next || null;
+  }
+
+  return currNode.next;
+};
