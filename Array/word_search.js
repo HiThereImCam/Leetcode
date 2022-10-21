@@ -140,3 +140,76 @@ var exist = function (board, word) {
 
   return false;
 };
+
+/*
+    - iterate through the grid
+        - check if the current letter in the grid is equal to the first
+          char in the string
+            - traverse through the grid via a helper function
+                - if this helper function returns true
+                    - return true
+    - return false because we have iterated through the whole grid                
+
+
+    helper function
+        - what parameters does this helper function take?
+            - grid, row, col, Set, word, idx
+                - Set controls if we have seen a character before then do not go to that character
+                - word/idx controls what character in the string we're looking for
+        - what is our basecases?
+            - if OB || current character in grid !== current character in string ||
+                 we have seen the character already
+                - return false
+            - if idx === word.length meaning we have found the whole word
+                - return true
+                 
+        - tricky part
+            - what happens if the current element is valid but leads to a dead end?
+                - we won't know til the recursive calls come back
+                - if the recursive calls come back negative
+                    - delete the positions in the set
+                    - do I want to delete whether or not the value 
+        
+*/
+
+const traverseGrid3 = (board, row, col, set, word, idx) => {
+  if (idx === word.length) return true;
+
+  let pos = row + "," + col;
+  if (
+    row < 0 ||
+    row >= board.length ||
+    col < 0 ||
+    col >= board[0].length ||
+    set.has(pos) ||
+    board[row][col] !== word[idx]
+  )
+    return false;
+
+  set.add(pos);
+
+  // traverse through the grid
+  let result =
+    traverseGrid3(board, row, col - 1, set, word, idx + 1) ||
+    traverseGrid3(board, row, col + 1, set, word, idx + 1) ||
+    traverseGrid3(board, row - 1, col, set, word, idx + 1) ||
+    traverseGrid3(board, row + 1, col, set, word, idx + 1);
+
+  set.delete(pos);
+  return result;
+};
+
+var exist = function (board, word) {
+  for (let row = 0; row < board.length; row++) {
+    for (let col = 0; col < board[0].length; col++) {
+      if (
+        board[row][col] === word[0] &&
+        traverseGrid3(board, row, col, new Set(), word, 0)
+      ) {
+        return true;
+      }
+    }
+  }
+
+  return false;
+};

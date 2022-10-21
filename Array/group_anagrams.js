@@ -3,7 +3,7 @@ const groupAnagrams = (strs) => {
   let result = {};
 
   for (let i = 0; i < strs.length; i++) {
-    let sortedStr = strs[i].split("").sort().join(",");
+    let sortedStr = strs[i].split("").sort().join("");
     if (result[sortedStr]) {
       result[sortedStr].push(strs[i]);
     } else {
