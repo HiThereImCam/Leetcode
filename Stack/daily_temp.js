@@ -78,3 +78,39 @@ const dailyTemperaturesSol = (temps) => {
 
   return outout;
 };
+
+// part 2
+
+var dailyTemperatures2 = function (temperatures) {
+  let stack = [];
+  let max = 0;
+  let result = [];
+
+  let i = 0;
+  while (i < temperatures.length) {
+    let val = temperatures[i];
+    if (stack.length < 1) {
+      stack.push(val);
+      max = val;
+    } else if (val > max) {
+      while (stack.length > 0) {
+        result.push(stack.length);
+        stack.pop();
+      }
+      max = val;
+      stack.push(val);
+    } else {
+      stack.push(val);
+    }
+
+    i += 1;
+  }
+
+  // if there are values still in stack, iterate through stack and push 0's to result
+
+  for (let el of stack) {
+    result.push(0);
+  }
+
+  return result;
+};
