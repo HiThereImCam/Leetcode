@@ -22,3 +22,14 @@ const treeSumRecursively = (root) => {
 
   return root.val + leftSum + rightSum;
 };
+
+
+// part 2
+const treeSumRecursively2 = (root) => {
+  if (!root) return 0;
+
+  let leftSum = treeSum(root.left);
+  let rightSum = treeSum(root.right);
+
+  return root.val + leftSum + rightSum;
+};
