@@ -57,3 +57,19 @@ const bottomRightValue = (root) => {
     would return 2 as the farthest right node
     the question is a bit misleading
   */
+
+// part 2
+const bottomRightValue2 = (root) => {
+  let queue = [root];
+  let farthestVal = null;
+  while (queue.length > 0) {
+    let currNode = queue.shift();
+
+    if (currNode.left) queue.push(currNode.left);
+    if (currNode.right) queue.push(currNode.right);
+
+    if (queue.length === 0) farthestVal = currNode.val;
+  }
+
+  return farthestVal;
+};
