@@ -95,3 +95,35 @@ var flatten = function (head) {
 
   return head;
 };
+
+
+// part 2
+var flatten2 = function (head) {
+  const stack = [];
+
+  let currNode = head;
+
+  while (currNode !== null) {
+    if (currNode.child) {
+      if (currNode.next) {
+        stack.push(currNode.next); // [3]
+      }
+
+      let child = currNode.child;
+      currNode.child = null;
+      currNode.next = child;
+      child.prev = currNode;
+      currNode = child;
+    } else if (currNode.next === null && stack.length > 0) {
+      let next = stack.pop();
+      currNode.next = next;
+      next.prev = currNode;
+      currNode = currNode.next;
+    } else {
+      currNode = currNode.next;
+    }
+    t;
+  }
+
+  return head;
+};
