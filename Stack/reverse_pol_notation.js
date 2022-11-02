@@ -80,3 +80,31 @@ function RPNResults(tokens) {
 
   return stack.pop();
 }
+
+// part 3
+let OPERANDS3 = {
+  "+": (a, b) => a + b,
+  "-": (a, b) => a - b,
+  "/": (a, b) => Math.trunc(a / b),
+  "*": (a, b) => a * b,
+};
+
+["2", "1", "+", "3", "*"];
+
+function RPNResults3(tokens) {
+  let stack = [];
+
+  for (let token of tokens) {
+    if (token in OPERANDS) {
+      let right;
+      let left = stack.pop();
+      let val = OPERANDS[token](left, right);
+
+      stack.push(val);
+    }
+
+    stack.push(Number(token));
+  }
+
+  return stack.pop();
+}
