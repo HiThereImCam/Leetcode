@@ -97,8 +97,9 @@ var flatten = function (head) {
 };
 
 
+
 // part 2
-var flatten2 = function (head) {
+var flatten24 = function (head) {
   const stack = [];
 
   let currNode = head;
