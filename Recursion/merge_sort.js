@@ -45,6 +45,7 @@ const mergeSort = (nums) => {
   const merge = (left, right) => {
     //console.log("left: ", left, "right: ", right)
     // iterate through left and right
+    // dont forget to shift 
     let result = []
     while(left.length > 0 && right.length > 0){
       if(left[0] < right[0]){
@@ -58,4 +59,4 @@ const mergeSort = (nums) => {
     result.push(...right)
     
     return result
-  }
+  } 
