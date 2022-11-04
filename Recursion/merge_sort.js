@@ -60,3 +60,38 @@ const mergeSort = (nums) => {
     
     return result
   } 
+
+  // part 2
+  /*
+  basecase
+    - the smallest possible 
+    - if the length of nums === 1
+*/
+
+const mergeSort = (nums) => {
+  if(nums.length === 1) return nums
+  const mid = Math.floor(nums.length / 2)
+  const left = nums.slice(0, mid)
+  const right = nums.slice(mid)
+  const sortedLeft = mergeSort(left)
+  const sortedRight = mergeSort(right)
+  
+  return joinElements(sortedLeft, sortedRight)
+};
+
+const joinElements = (left, right) => {
+  let result = []
+  
+  while(left.length > 0 && right.length > 0){
+    if(left[0] < right[0]){
+      result.push(left.shift()) 
+    }else{
+      result.push(right.shift())
+    }
+  }
+  
+  result.push(...left)
+  result.push(...right)
+  
+  return result
+}
