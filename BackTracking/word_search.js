@@ -130,3 +130,50 @@ var exist = function (board, word) {
 
   return result;
 };
+
+// part 2
+
+const stringSearch = (grid, s) => {
+  for (let row = 0; row < grid.length; row += 1) {
+    for (let col = 0; col < grid[0].length; col += 1) {
+      if (grid[row][col] === s[0] && traverseGrid(grid, row, col, 0, s)) {
+        // console.log("true")
+        return true;
+      }
+    }
+  }
+  // console.log("false")
+  return false;
+};
+
+const traverseGrid = (grid, row, col, idx, s) => {
+  if (idx === s.length) return true;
+
+  if (row < 0 || row >= grid.length || col < 0 || col >= grid[0].length) {
+    // console.log("OB")
+    return false;
+  }
+  if (grid[row][col] !== s[idx]) {
+    // console.log("not equal")
+    return false;
+  }
+  if (grid[row][col] === "#") {
+    // console.log("#")
+    return false;
+  }
+  let char = grid[row][col];
+  grid[row][col] = "#";
+
+  let result =
+    traverseGrid(grid, row, col - 1, idx + 1, s) ||
+    traverseGrid(grid, row, col + 1, idx + 1, s) ||
+    traverseGrid(grid, row - 1, col, idx + 1, s) ||
+    traverseGrid(grid, row + 1, col, idx + 1, s);
+
+  grid[row][col] = char;
+  return result;
+};
+
+module.exports = {
+  stringSearch,
+};
