@@ -150,3 +150,130 @@ const islandCount = (grid) => {
   // console.log( count)
   return count;
 };
+
+
+// part 3 11/09/2022
+// Given an m x n 2D binary grid grid which represents a map of '1's (land) and '0's (water), 
+// return the number of islands.
+// An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. 
+// You may assume all four edges of the grid are all surrounded by water.
+
+// Example Input: 
+// grid = [
+//   ["1","1","1","1","0"],
+//   ["1","1","0","1","0"],
+//   ["1","1","0","0","0"],
+//   ["0","0","0","0","0"]
+// ]
+
+// Output: 1
+
+// constraints
+// 	- 1 < row, col < 300
+// 	- row does not have to equal col
+// 	- guaranteed at least 1 piece of land
+  
+// DFS 
+
+
+// RETURNING A COUNT OF NUMBER OF ISLANDS
+
+// question that I need to answer?
+// 	- how do we come up with the size of the island
+//   	- [
+//     	[1, 0, 1]
+//       [0, 0, 0]
+//      ]
+     
+//     - grid = [
+//         ["1","1","1","1","0"],
+//         ["1","1","0","1","0"],
+//         ["1","1","0","0","0"],
+//         ["0","0","0","0","1"]
+// 			] // returns 2
+
+// idea
+// 	main function
+// 	- set
+//   	- holds the visited positions
+//   - count 
+//   - create a traverseGrid helper function to validate the number of islands
+//   - returns count
+  
+// 	helper function (traverseGrid)
+//   - base cases
+//   	 - check OB
+//      - check if we have seen
+//      - check if current val is 0
+     
+  
+
+
+
+
+
+
+const numIslands = (grid) => {
+	let visited = new Set()
+  let count = 0
+  
+  
+  for(let r = 0; r < grid.length; r += 1){
+  	for(let col = 0; r < grid[0].length; c += 1){
+    	let pos = r + ',' + c
+    	if(
+      	grid[r][c] === '1' && !visited.has(pos)
+      ){
+      	count += 1
+        traverseGrid(grid, r, c, visited)
+      }
+    }
+  }
+	return count
+}
+
+
+//  - grid = [
+//       ["1","1","1","1","0"],
+//       ["1","1","0","1","0"],
+//       ["1","1","0","0","0"],
+//       ["0","0","0","0","1"]
+//     ] // returns 2
+    
+// r: 1
+// c: 1
+
+// visited: {
+// 	[0, 0],
+//   [1, 0], 
+//   [2, 0],
+//   [2, 1], 
+//   [1, 1]
+//   ...
+// }
+
+T(c) = O(m * n)
+S(c) = O(m * n)
+
+const traverseGrid = (grid, r, c, visited) => {
+	if(
+  	r < 0 || 
+    r >= grid.length ||
+    c < 0 || 
+    c >= grid[0].length
+  ) return false
+  
+  if(grid[r][c] === '0') return false
+  
+  let pos = r + ',' + c
+  if(visited.has(pos)) return false
+  
+  visited.add(pos)
+  
+  traverseGrid(grid, r - 1, c, visited)
+  traverseGrid(grid, r + 1, c, visited)
+  traverseGrid(grid, r, c - 1, visited)
+  traverseGrid(grid, r, c + 1, visited)
+}
+
+
