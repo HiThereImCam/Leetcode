@@ -106,3 +106,63 @@ const traversePath = (graph, node, distance) => {
 
 // 08/18/22
 // did not pass it
+
+
+// 11/11/2022
+
+/*
+  directed acyclic graph
+    - there are no cycles
+    
+  returns the length of the longest path in the graph
+  a path is considered the number of edges
+  
+  what is our base case?
+    - when we get to the end of a path, the length of the adjacency list will
+      be empty
+    - we must also account for the edge itself
+    
+  ex:   A - B - C 
+        returns 2
+  
+  we know that the number of edges from the node that has an empty adjacency
+  list is 0
+  
+  so we can use that to create an object whose starting values are the nodes
+  with empty lists
+    - this helps us while we iterate through the graph, we know when to stop and 
+      we know the distance
+  
+  
+  we can memoize the distance values by storing the distance to the empty node
+  this well help us keep the time complexity down as well as making it easier 
+  to return the longest path
+*/
+
+const traverse = (graph, node, distance) => {
+  if(node in distance) return distance[node]
+  
+  let maxCount = 0
+  for(let neighbor of graph[node]){
+    let currCount = traverse(graph, neighbor, distance)
+    maxCount = Math.max(maxCount, currCount)
+  }
+  
+  distance[node] = 1 + maxCount
+  return distance[node]
+}
+
+const longestPath3 = (graph) => {
+  let distance = {}
+  
+  for(let node in graph){
+    if(graph[node].length < 1){
+      distance[node] = 0
+    }
+  }
+  
+  for(let node in graph){
+    traverse(graph, node, distance)
+  }
+  return Math.max(...Object.values(distance))
+};
