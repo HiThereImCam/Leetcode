@@ -429,14 +429,14 @@ const bestBridge3 = (grid) => {
 // 11/11/2022
 
 const findIsland4 = (grid) => {
-  const visited = new Set()
+  let visited;
 
   for(let row = 0; row < grid.length; row += 1){
     for(let col = 0; col < grid[0].length; col += 1){
       if(
         grid[row][col] === 'L'
       ){
-        traverseGrid(grid, row, col, visited)
+        visited = traverseGrid(grid, row, col, new Set())
         break
       }
     }
@@ -445,15 +445,23 @@ const findIsland4 = (grid) => {
   return visited
 }
 
-const traverseGrid = (grid, row, col, visited) => {
+const isInbounds4 = (grid, row, col) => {
   if(
     row < 0 ||
-    row >= grid.length ||
+    row >= grid.length || 
     col < 0 ||
     col >= grid[0].length
-  ) return
-  
-  if(grid[row][col] !== 'L') return
+  ){
+    return false
+  }
+
+  return true
+}
+
+const traverseGrid = (grid, row, col, visited) => {
+  if(!inBounds4(grid, row, col)) return visited
+
+  if(grid[row][col] !== 'L') return visited
   
   let pos = row + ',' + col
   if(visited.has(pos)) return
@@ -465,23 +473,30 @@ const traverseGrid = (grid, row, col, visited) => {
   traverseGrid(grid, row, col - 1, visited)
   traverseGrid(grid, row, col + 1, visited)
   
-  return
+  return visited
 }
 
 
 const bestBridge4 = (grid) => {
   const firstIsland = findIsland(grid)
+  const visited = new Set()
   let queue = []
   
+  // you can also iterate over Sets via for of 
   firstIsland.forEach(pos => {
-    let [row, col] = pos.split(',')
-    row = parseInt(row)
-    col = parseInt(col)
+    // let [row, col] = pos.split(',')
+    // row = parseInt(row)
+    // col = parseInt(col)
+
+    // we can turn the above into 
+    let [row, col] = pos.split(',').map(Number)
     queue.push([row, col, 0])
   })
   
   
-  let minBridge = Infinity
+  //let minBridge = Infinity 
+  // we don't need the above because we will always hit the closest piece of land first
+
   
   while(queue.length){
     let [row, col, dist] = queue.shift()
@@ -490,7 +505,8 @@ const bestBridge4 = (grid) => {
     if(!firstIsland.has(pos) &&
        grid[row][col] === 'L'
       ){
-      minBridge = Math.min(minBridge, grid[row][col])
+      // minBridge = Math.min(minBridge, grid[row][col])
+      return dist - 1
     }
     
     const deltas = [[-1, 0], [1,0], [0, -1], [0, 1]]
@@ -500,8 +516,14 @@ const bestBridge4 = (grid) => {
       const neighborR = deltaR + row
       const neighborC = deltaC + col
       const neighborPos= neighborR + ',' + neighborC
-      
-      // if()
+      if(
+        inBounds4(grid, row, col) &&
+        !firstIsland.has(neighborPos)
+      ){
+        // should I have a visite set. I think so
+        visited.add(neighborPos)
+        queue.push([neighborR, neighborC, dist + 1])
+      }
     }
   }
 };
