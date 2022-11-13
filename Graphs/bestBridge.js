@@ -400,3 +400,108 @@ const bestBridge3 = (grid) => {
     }
   }
 };
+
+/*
+  I think 
+    - find the first island
+      - find the size of the island
+      - each piece of land will be the starting position within a queue
+    
+    - after finding starting points
+    
+    - we can have a queue where 
+      - [row, col, dist]
+    - we need a counter where the start is Infinity
+    - we need a visited set
+    
+  idea
+    main driver 
+      - sub function that finds the first island 
+        - return an object that has all of the positions of the first island
+      - iterate over object 
+        - turn each element in Set into row col for queue
+      - iterate over queue
+        - if possible, go in every direction
+        - 
+  
+*/
+
+// 11/11/2022
+
+const findIsland4 = (grid) => {
+  const visited = new Set()
+
+  for(let row = 0; row < grid.length; row += 1){
+    for(let col = 0; col < grid[0].length; col += 1){
+      if(
+        grid[row][col] === 'L'
+      ){
+        traverseGrid(grid, row, col, visited)
+        break
+      }
+    }
+  }
+  
+  return visited
+}
+
+const traverseGrid = (grid, row, col, visited) => {
+  if(
+    row < 0 ||
+    row >= grid.length ||
+    col < 0 ||
+    col >= grid[0].length
+  ) return
+  
+  if(grid[row][col] !== 'L') return
+  
+  let pos = row + ',' + col
+  if(visited.has(pos)) return
+  
+  visited.add(pos)
+  
+  traverseGrid(grid, row - 1, col, visited)
+  traverseGrid(grid, row + 1, col, visited)
+  traverseGrid(grid, row, col - 1, visited)
+  traverseGrid(grid, row, col + 1, visited)
+  
+  return
+}
+
+
+const bestBridge4 = (grid) => {
+  const firstIsland = findIsland(grid)
+  let queue = []
+  
+  firstIsland.forEach(pos => {
+    let [row, col] = pos.split(',')
+    row = parseInt(row)
+    col = parseInt(col)
+    queue.push([row, col, 0])
+  })
+  
+  
+  let minBridge = Infinity
+  
+  while(queue.length){
+    let [row, col, dist] = queue.shift()
+    
+    let pos = row + ',' + col
+    if(!firstIsland.has(pos) &&
+       grid[row][col] === 'L'
+      ){
+      minBridge = Math.min(minBridge, grid[row][col])
+    }
+    
+    const deltas = [[-1, 0], [1,0], [0, -1], [0, 1]]
+    
+    for(let delta of deltas){
+      const [deltaR, deltaC] = delta
+      const neighborR = deltaR + row
+      const neighborC = deltaC + col
+      const neighborPos= neighborR + ',' + neighborC
+      
+      // if()
+    }
+  }
+};
