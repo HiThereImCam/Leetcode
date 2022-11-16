@@ -71,3 +71,97 @@ var addTwoNumbers = function (l1, l2) {
 
   return currNode.next;
 };
+
+/* 11/16/2022 */
+
+// Input: l1 = [2,4,3], l2 = [5,6,4]
+// Output: [7,0,8]
+
+// 2 4 3 reversed 
+// 5 6 4 reveresed
+
+// 3 4 2
+// 4 6 5
+
+// 8	0	7
+
+// we capture the carry over
+
+// 0 - 9
+
+// 3 4 2		// l1
+// 	2 5   // l2
+ 
+// 3 6 7 
+
+// 2 4 3		// l1
+// 5 2
+
+// 7 6 3
+
+// we have to create a new linkedlist
+// 	- where new head node
+
+
+
+// idea
+// 	- variable that we use to check for carry over (0 or 1)
+//   - iterate through both l1 and l2
+//     - we create a new node and set it's value to l1 + l2 + carryOver
+//     - we set we the current head's next of the linkedList to this new node
+//     - update the pointer 
+    
+// 	- if !l1 add the rest of l2
+//   - if !l2 add the rest of l1
+  
+// 	- return the original head
+  
+
+
+
+const addTwoNumbers = (l1, l2) => {
+	const head = new Node()
+  const temp = head
+  let carry = 0
+  
+  while(l1 && l2){
+  	const currNode = new Node()
+    
+    if(l1?.val && l2?.val)
+    {
+    	let currVal = l1.val + l2.val + carry
+    
+      if(currVal > 10){
+        currVal = currVal % 10
+        carry = 1
+      }else{
+      	carry = 0
+      }
+
+      currNode.val = currVal
+
+      temp.next = currNode
+      temp = temp.next
+
+      l1 = l1.next
+      l2 = l2.next
+    }else{
+    	break
+    }
+  }
+  
+  
+  if(!l1){
+  	const newNode = new Node()
+    newNode.val = carry + l2.val
+    temp.next = newNode
+  }
+  
+  if(!l2){
+  	const newNode = new Node()
+    newNode.val = carry + l1.val
+    temp.next = newNode
+  }
+  
+  return head.next
+}
