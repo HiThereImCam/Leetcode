@@ -65,3 +65,57 @@ var asteroidCollisionSol = function (asteroids) {
 
   return stack;
 };
+
+
+// 11/17/2022
+/**
+ * @param {number[]} asteroids
+ * @return {number[]}
+ */
+
+ const collision = (prev, curr) => {
+  if((prev < 0 && curr < 0) ||
+      (prev > 0 && curr > 0)
+    ) return false
+  
+  return true
+}
+
+var asteroidCollision = function(asteroids) {
+  let stack = []
+  
+  for(let i = 0; i < asteroids.length; i += 1){
+      let curr = asteroids[i]
+      
+      if(stack.length < 1){
+          stack.push(curr)
+      }else{
+          let prev = stack[stack.length - 1]
+          while(
+              stack.length > 0 &&
+              curr < 0 &&
+              prev > 0
+          ) {
+              let diff = curr + prev
+              
+              if(diff === 0){
+                  curr = 0
+                  stack.pop()
+              }else if(diff < 0){
+                  stack.pop()
+                  prev = stack[stack.length - 1]
+              }else{
+                  // because
+                  curr = 0
+              }
+          }
+          
+          if(curr !== 0){
+              stack.push(curr)
+          }
+      }
+  }
+  
+  
+  return stack
+};
