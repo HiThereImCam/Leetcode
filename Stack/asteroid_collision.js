@@ -183,4 +183,4 @@ var asteroidCollision = function(asteroids) {
   }
   
   return stack
-};
+}; 
