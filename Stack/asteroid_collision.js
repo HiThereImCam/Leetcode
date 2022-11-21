@@ -119,3 +119,68 @@ var asteroidCollision = function(asteroids) {
   
   return stack
 };
+
+// 11/19/2022
+/*
+    collision
+        - when current val is pos and the next value is negative
+    
+        - definitions during collision
+            
+            if sum of prev + next > 0
+                - keep the pos
+            else if sum of prev + curr < 0
+                - keep the neg
+            else
+                - set both values to 0
+            
+    
+        
+    ex: [5, 10, -5] output: [5, 10]
+             i   j
+             
+    ex: [10, 2, -5] stack = [10]
+                 i
+        
+        question
+            - when would we stop iterating through the stack?
+                - we would stop iterating through the stack when there are no more
+                  collisions
+                - pseudocode
+                    - while(
+                        curr < 0 && 
+                        topOfStack > 0 &&
+                        stack.length > 0
+                        )
+                    
+    ex 3: [8, -8] stack = []
+               i
+*/
+var asteroidCollision = function(asteroids) {
+  const stack = []
+   
+  for(let asteroid of asteroids){
+      while(
+          asteroid < 0 &&
+          stack[stack.length - 1] > 0 &&
+          stack.length > 0
+      ){
+          let sum = stack[stack.length - 1] + asteroid
+          
+          if(sum < 0){
+              stack.pop()
+          }else if(sum === 0){
+              asteroid = 0
+              stack.pop()
+          }else{
+              asteroid = 0
+          }
+      }
+      
+      if(asteroid !== 0){
+          stack.push(asteroid)
+      }
+  }
+  
+  return stack
+};

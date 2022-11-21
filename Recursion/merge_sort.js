@@ -68,7 +68,7 @@ const mergeSort = (nums) => {
     - if the length of nums === 1
 */
 
-const mergeSort = (nums) => {
+const mergeSort2 = (nums) => {
   if(nums.length === 1) return nums
   const mid = Math.floor(nums.length / 2)
   const left = nums.slice(0, mid)
@@ -95,3 +95,64 @@ const joinElements = (left, right) => {
   
   return result
 }
+
+// 11/20/2022
+/*
+  numbers = [10, 4, 42, 5, 8, 100, 5, 6, 12, 40];
+  left = [10, 4, 42, 5, 8] right = [100, 5, 6, 12, 40]
+      [10, 4, 42] [5,8]       [100, 5, 6] [12,40]
+  [10, 4] [42]     [5] [8]
+  [10] [4] [42]  [5] [8]
+  
+  [10] [4] -> left = [4, 10] right = [42]
+           -> left = [4, 10, 42]
+  
+  
+  idea
+    - recursion
+      - base case
+        - when length of subArray === 1 return [currElem]
+      - once we've gotten the subArrays down to a single elem
+        - we need to start swapping elements in ascending order
+      - 
+      
+  
+*/
+
+/*
+  we want to look at the front of the array
+  because elements will be sorted in increasing order
+
+  push only one at a time because one side may have multiple
+  elements that are smaller than the current on the other
+*/
+
+const swapElements = (left, right) => {
+  let merged = []
+  
+  while(left.length > 0 &&
+        right.length > 0
+       ){
+    if(left[0] < right[0]){
+      merged.push(left.shift())
+    }else{
+      merged.push(right.shift())
+    }
+  }
+  
+  merged.push(...left)
+  merged.push(...right)
+  
+  return merged
+}
+
+const mergeSort3 = (nums) => {
+  if(nums.length <= 1) return nums
+  let mid = Math.floor(nums.length / 2)
+  let left = nums.slice(0,mid)
+  let right = nums.slice(mid)
+  let recurseLeft = mergeSort(left)
+  let recurseRight = mergeSort(right)
+  
+  return swapElements(recurseLeft, recurseRight)
+};
