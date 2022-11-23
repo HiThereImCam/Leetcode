@@ -70,3 +70,21 @@ var findMinArrowShots = function(points) {
     }
     return count
 };
+
+// 11/23/2022
+var findMinArrowShots = function(points) {
+    let sortedPoints = points.sort((a,b) => a[0] - b[0])
+    let prev = null
+    let count = 0
+    
+    for(let [start, end] of sortedPoints){
+        if(prev == null || prev < start){
+            count += 1
+            prev = end
+        }else{
+            prev = Math.min(prev, end)
+        }
+    }
+    
+    return count
+};
