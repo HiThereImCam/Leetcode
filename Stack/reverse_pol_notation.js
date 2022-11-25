@@ -108,3 +108,74 @@ function RPNResults3(tokens) {
 
   return stack.pop();
 }
+
+
+/*
+
+    [2, 1, +, 3, *]
+    
+    - we can use a stack here
+    
+    ["4","13","5","/","+"]
+                       i   
+    stack = [6]
+    
+    pop off the first 2
+    a = 13 b = 5
+    Math.trunc(13/5) => 2
+    
+    pop off the first 2
+    a = 4 b = 2
+    4 + 2 = 6
+    
+    returns 6
+    
+*/
+
+// helper function that evaluates the expression
+// const evalExp = (a, b, token) => {
+//     if(token === '+'){
+//         return a + b
+//     }else if(token === '-'){
+//         return a - b
+//     }else if(token === '/'){
+//         return Math.trunc(a/b)
+//     }else{
+//         return a * b
+//     }
+// }
+
+
+//11/25/2022
+
+const OPERANDS4 = {
+  '+': (a,b) => a + b,
+  '-': (a,b) => a - b,
+  '/': (a,b) => Math.trunc(a/b),
+  '*': (a,b) => a * b
+}
+
+/*
+     ["4","/"] -> invalid
+     ["4", "/", "+"] -> invalid
+*/
+
+var evalRPN = function(tokens) {
+  // const operands = ['+', '-', '*', '/']
+  let stack = []
+  
+  for(let token of tokens){
+      if(token in OPERANDS){
+          // we have evaluate the expression
+          let b = stack.pop()
+          let a = stack.pop() 
+          
+          let result = OPERANDS[token](a,b)
+          stack.push(result)
+      }else{
+          stack.push(parseInt(token))
+      }
+  }
+  
+  return stack.pop()
+};
