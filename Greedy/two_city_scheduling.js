@@ -48,3 +48,37 @@ var twoCitySchedCost = function(costs) {
     
     return result
 };
+
+// 11/28/2022
+
+/**
+ * @param {number[][]} costs
+ * @return {number}
+ */
+
+/*
+    sorting the difference
+*/
+var twoCitySchedCost = function(costs) {
+    let half = costs.length / 2
+    costs.sort((a,b) => {
+        cityA = a[0] - a[1]
+        cityB = b[0] - b[1]
+        
+        return cityA - cityB
+    })
+    
+    let minCost = 0
+    
+    for(let i = 0; i < costs.length; i+=1){
+        const [cityA, cityB] = costs[i]
+        
+        if(i < half){
+            minCost += cityA
+        }else{
+            minCost += cityB
+        }
+    }
+    
+    return minCost
+};
