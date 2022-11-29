@@ -114,3 +114,26 @@ const positioningPlants2 = (costs, pos = 0, lastPlant = null, memo={}) => {
   memo[key] = min
   return min
 };
+
+// 11/28/2022
+
+const positioningPlants3 = (costs, pos = 0, prev = null, memo={}) => {
+  const key = pos + ',' + prev
+  if(key in memo) return memo[key]
+  if(pos === costs.length) return 0
+  
+  let count = Infinity
+  for(let plant = 0; plant < costs[pos].length; plant += 1){
+    if(plant !== prev){
+      const possible = costs[pos][plant] + positioningPlants(costs, pos + 1, plant, memo)
+      count = Math.min(possible, count)
+    }
+  }
+  
+  memo[key] = count
+  return count
+};
+
+module.exports = {
+  positioningPlants,
+};
