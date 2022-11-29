@@ -74,3 +74,38 @@ var productExceptSelf = function (nums) {
     nums[j] = 4 3 2 1
     j = 3 2 1 0 
 */
+
+// 11/29/2022
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+
+/*
+    brute force approach
+        - n^2 solution
+    
+    idea
+        - 
+     
+
+
+*/
+
+var productExceptSelf2 = function(nums) {
+  let output = new Array(nums.length).fill(1)
+  let pre = 1
+  let post = 1
+  
+  for(let i = 0; i < nums.length; i++){
+      output[i] = pre
+      pre *= nums[i]
+  }
+  
+  for(let j = nums.length - 1; j >= 0; j -= 1){
+      output[j] *= post
+      post *= nums[j]
+  }
+  
+  return output
+};
