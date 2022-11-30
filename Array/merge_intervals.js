@@ -44,3 +44,24 @@ var merge = function (intervals) {
 
   return result;
 };
+
+// 11/29/2022
+const combineIntervals = (intervals) => {
+  intervals.sort((a,b) => a[0] - b[0])
+  
+  let result = [intervals[0]]
+  
+  for(let currInterval of intervals){ 
+    let prevInterval = result[result.length - 1] 
+    
+    if(prevInterval[1] >= currInterval[0]){
+      if(prevInterval[1] <= currInterval[1]){
+        prevInterval[1] = currInterval[1] // merge together
+      }
+    }else{
+      result.push(currInterval)
+    }
+  }
+  
+  return result
+};
